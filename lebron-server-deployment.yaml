@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lebron-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lebron-server
+  template:
+    metadata:
+      labels:
+        app: lebron-server
+    spec:
+      containers:
+        - name: lebron-server
+          image: 946480689171.dkr.ecr.us-east-1.amazonaws.com/springboot-eks:latest
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources: {}
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lebron-service
+spec:
+  selector:
+    app: lebron-server
+  ports:
+    - protocol: TCP
+      port: 80       # External port to expose
+      targetPort: 8080 # Port on which your app is running in the pod
+  type: LoadBalancer

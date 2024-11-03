@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: springboot
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+  flyway:
+    locations: classpath:/db/migration
+    baselineOnMigrate: true
+    enabled: true
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://database-1-practice.cluster-ckivi9hvj5kj.us-east-1.rds.amazonaws.com:5432/postgres
+    username: postgres
+    password: Aot031101

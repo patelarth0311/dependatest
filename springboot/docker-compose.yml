@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+    lebron-server:
+          image: lebron-server
+          ports:
+            - 8080:8080
+    # db-server:
+    #     image: postgres
+    #     user: "postgres"
+    #     healthcheck:
+    #       test: ["CMD-SHELL", "pg_isready -U postgres"]
+    #       interval: 10s
+    #       retries: 5
+    #     environment:
+    #       POSTGRES_PASSWORD: your_password
+    #     ports:
+    #       - 5432:5432   
